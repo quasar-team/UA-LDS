@@ -104,6 +104,39 @@ void ualds_platform_getconfigfile_path(char *szFilePath, size_t len)
     }
 }
 
+void getDefaultCertificateFolder(char *szFolderPath, size_t len)
+{
+    char *pszAppData = getenv("ALLUSERSPROFILE");
+
+    if (pszAppData)
+    {
+        strlcpy(szFolderPath, pszAppData, len);
+        strlcat(szFolderPath, "\\OPC Foundation\\UA\\pki", len);
+    }
+    else
+    {
+        /* fallback to working directory */
+        ualds_platform_getcwd(szFolderPath, len);
+    }
+}
+
+void getDefaultLogFilePath(char *szFilePath, size_t len)
+{
+    char *pszAppData = getenv("ALLUSERSPROFILE");
+
+    if (pszAppData)
+    {
+        strlcpy(szFilePath, pszAppData, len);
+        strlcat(szFilePath, "\\OPC Foundation\\UA\\Discovery\\opcualds.log", len);
+    }
+    else
+    {
+        /* fallback to working directory */
+        ualds_platform_getcwd(szFilePath, len);
+        strlcat(szFilePath, "\\opcualds.log", len);
+    }
+}
+
 /** Windows specific function for onvert IP4 to hostname .*/
 int ualds_platform_convertIP4ToHostname(char* host, int len)
 {
