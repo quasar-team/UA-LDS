@@ -90,18 +90,6 @@ void ualds_platform_getconfigfile_path(char *szFilePath, size_t len)
         strlcpy(szFilePath, pszAppData, len);
         strlcat(szFilePath, "\\OPC Foundation\\UA\\Discovery\\ualds.ini", len);
     }
-    
-    if (!pszAppData || !ualds_platform_fileexists(szFilePath))
-    {
-        /* fallback to working directory */
-        strlcpy(szFilePath, "ualds.ini", len);
-    }
-
-    if (!ualds_platform_fileexists(szFilePath))
-    {
-        /* Results in lds exiting */
-        szFilePath[0] = 0;
-    }
 }
 
 void getDefaultCertificateFolder(char *szFolderPath, size_t len)
