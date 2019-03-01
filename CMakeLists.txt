@@ -116,6 +116,7 @@ else()
     endif()
 endif()
 
+set(CPACK_RPM_PACKAGE_NAME OpcUaLds)
+set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/OpcUaLds")
 
-
-
+include(CPack)
